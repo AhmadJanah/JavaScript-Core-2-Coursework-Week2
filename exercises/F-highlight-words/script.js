@@ -1,5 +1,27 @@
+let arrayP = [];
 function highlightWords(paragraph, colours) {
   // Write your code here...
+  let content = document.getElementById("content");
+  let p = document.createElement("p");
+   p.id = "theText";
+  let selct = document.createElement("select");
+  colours.forEach(color => {
+    let opt = document.createElement("option");
+    opt.value = color;
+    opt.innerHTML = color;
+    selct.appendChild(opt);
+  });
+arrayP = paragraph.split(" ");
+arrayP.forEach(element => {
+  let span = document.createElement("span");
+  span.id = element;
+  span.innerHTML = element;
+  p.appendChild(span);
+  p.innerHTML += " ";
+});
+
+  content.appendChild(selct);
+  content.appendChild(p);
 }
 
 const paragraph =
@@ -8,3 +30,16 @@ const paragraph =
 const colours = ["yellow", "green", "blue", "none"];
 
 highlightWords(paragraph, colours);
+
+let myspans = document.querySelectorAll("p span");
+
+myspans.forEach(span => {
+  span.addEventListener('click', (e) => {
+    let selec = document.querySelector("select").value;
+
+    if (selec == "none")
+      span.style.backgroundColor = "white";
+    else
+      span.style.backgroundColor = selec;
+  });
+})
